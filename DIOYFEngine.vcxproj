@@ -143,6 +143,7 @@
     </ClCompile>
     <ClCompile Include="Engine\DIOYFEngine.cpp" />
     <ClCompile Include="Engine\EngineFactory.cpp" />
+    <Content Include="README.md" />
     <Content Include="Shader\Hello.hlsl" />
     <ClCompile Include="Engine\Math\EngineMath.cpp" />
     <ClCompile Include="Engine\Platform\Windows\WindowsEngine.cpp" />

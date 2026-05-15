@@ -2,4 +2,5 @@
 
 CEngine::CEngine()
 {
+    bTick = false;
 }
