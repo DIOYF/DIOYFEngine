@@ -1,5 +1,5 @@
 ﻿#include "WindowsMessageProcessing.h"
-//todo #include "../../Component/Input/Input.h"
+#include "../../Component/Input/Input.h"
 #include <WindowsX.h>
 
 LRESULT CALLBACK EngineWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -9,8 +9,7 @@ LRESULT CALLBACK EngineWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
     case WM_CLOSE:
         PostQuitMessage(0);
         return 0;
-
-    /* todo : mouse de
+    
     case WM_RBUTTONDOWN:
         MouseDownDelegate.Broadcast(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
         return 0;
@@ -23,7 +22,6 @@ LRESULT CALLBACK EngineWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
     case WM_MOUSEWHEEL:
         MousesWheelsDelegate.Broadcast(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam),(short)HIWORD(wParam));
         return 0;
-    */
     }
     
     //交给windows自己处理完成

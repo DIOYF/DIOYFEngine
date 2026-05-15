@@ -2,9 +2,7 @@
 #include "../../Config/EngineRenderConfig.h"
 #include "../../Math/EngineMath.h"
 
-/* todo Mesh
 #include "../../Mesh/Core/ObjectTransformation.h"
-*/
 
 
 FViewport::FViewport()

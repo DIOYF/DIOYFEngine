@@ -2,9 +2,8 @@
 
 #include "Engine/Debug/EngineDebug.h"
 #include "../../../../Config/EngineRenderConfig.h"
-//todo #include "../../../../Rendering/Core/Rendering.h"
+#include "../../../../Rendering/Core/Rendering.h"
 
-/*
 #include "../../../../Mesh/BoxMesh.h"
 #include "../../../../Mesh/SphereMesh.h"
 #include "../../../../Mesh/CylinderMesh.h"
@@ -14,7 +13,6 @@
 #include "../../../../Core/CoreObject/CoreMinimalObject.h"
 #include "../../../../Core/World.h"
 #include "../../../../Mesh/Core/MeshManage.h"
-*/
 
 
 #if defined(_WIN32)
@@ -43,12 +41,12 @@ CDirectXRenderingEngine::CDirectXRenderingEngine()
 
 	bTick = false;
 
-	//todo MeshManage = new CMeshManage();
+	MeshManage = new CMeshManage();
 }
 
 CDirectXRenderingEngine::~CDirectXRenderingEngine()
 {
-	//todo delete MeshManage;
+	delete MeshManage;
 }
 
 int CDirectXRenderingEngine::PreInit(FWinMainCommandParameters InParameters)
@@ -63,7 +61,7 @@ int CDirectXRenderingEngine::Init(FWinMainCommandParameters InParameters)
 
 	PostInitDirect3D();
 
-	//todo MeshManage->Init();
+	MeshManage->Init();
 
 	Engine_Log("DirectXRenderingEngine initialization complete.");
 
@@ -76,17 +74,14 @@ int CDirectXRenderingEngine::PostInit()
 
 	ANALYSIS_HRESULT(GraphicsCommandList->Reset(CommandAllocator.Get(), NULL));
 	{
-		/* todo
+
 		//构建Mesh
-	//	CBoxMesh* Box = CBoxMesh::CreateMesh();
 		if (GMesh* BoxMesh = MeshManage->CreateBoxMesh(4.f, 3.f, 1.5f))
 		{
 			BoxMesh->SetPosition(XMFLOAT3(4,3,5));
 			BoxMesh->SetRotation(fvector_3d(60.f, 1.f, 20.f));
 		}
-
-		//MeshManage->CreateBoxMesh(4.f, 3.f, 1.5f);
-		//MeshManage->CreateBoxMesh(4.f, 3.f, 1.5f);
+		
 		MeshManage->CreatePlaneMesh(4.f, 3.f, 20, 20);
 		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
 		{
@@ -104,11 +99,10 @@ int CDirectXRenderingEngine::PostInit()
 			ConeMesh->SetPosition(XMFLOAT3(-1, 1, 9));
 			ConeMesh->SetRotation(fvector_3d(90.f, 1.f, 20.f));
 		}
-		*/
 		
 	}
-	//
-	// todo MeshManage->BuildMesh();
+	
+	MeshManage->BuildMesh();
 
 	ANALYSIS_HRESULT(GraphicsCommandList->Close());
 
@@ -122,7 +116,7 @@ int CDirectXRenderingEngine::PostInit()
 
 void CDirectXRenderingEngine::UpdateCalculations(float DeltaTime, const FViewportInfo& ViewportInfo)
 {
-	//todo MeshManage->UpdateCalculations(DeltaTime, ViewportInfo);
+	MeshManage->UpdateCalculations(DeltaTime, ViewportInfo);
 }
 
 void CDirectXRenderingEngine::Tick(float DeltaTime)
@@ -130,7 +124,7 @@ void CDirectXRenderingEngine::Tick(float DeltaTime)
 	//重置录制相关的内存，为下一帧做准备
 	ANALYSIS_HRESULT(CommandAllocator->Reset());
 
-	//todo MeshManage->PreDraw(DeltaTime);
+	MeshManage->PreDraw(DeltaTime);
 
 	//指向哪个资源 转换其状态
 	CD3DX12_RESOURCE_BARRIER ResourceBarrierPresent = CD3DX12_RESOURCE_BARRIER::Transition(GetCurrentSwapBuff(),
@@ -159,8 +153,8 @@ void CDirectXRenderingEngine::Tick(float DeltaTime)
 	GraphicsCommandList->OMSetRenderTargets(1, &SwapBufferView,
 		true, &DepthStencilView);
 
-	//todo MeshManage->Draw(DeltaTime);
-	//todo MeshManage->PostDraw(DeltaTime);
+	MeshManage->Draw(DeltaTime);
+	MeshManage->PostDraw(DeltaTime);
 
 	CD3DX12_RESOURCE_BARRIER ResourceBarrierPresentRenderTarget = CD3DX12_RESOURCE_BARRIER::Transition(GetCurrentSwapBuff(),
 		D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);

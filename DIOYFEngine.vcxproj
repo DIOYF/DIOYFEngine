@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -208,13 +208,19 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="Engine\Component\Core\Component.cpp" />
+    <ClCompile Include="Engine\Component\InputComponent.cpp" />
+    <ClCompile Include="Engine\Component\Input\Input.cpp" />
+    <ClCompile Include="Engine\Component\Input\InputType.cpp" />
     <ClCompile Include="Engine\Component\TransformationComponent.cpp" />
     <ClCompile Include="Engine\Config\EngineRenderConfig.cpp" />
+    <ClCompile Include="Engine\Core\Camera.cpp" />
     <ClCompile Include="Engine\Core\CoreObject\CoreMinimalObject.cpp" />
     <ClCompile Include="Engine\Core\CoreObject\GuidInterface.cpp" />
     <ClCompile Include="Engine\Core\Engine.cpp" />
     <ClCompile Include="Engine\Core\Viewport\Viewport.cpp" />
     <ClCompile Include="Engine\Core\Viewport\ViewportInfo.cpp" />
+    <ClCompile Include="Engine\Core\Viewport\ViewportTransformation.cpp" />
+    <ClCompile Include="Engine\Core\World.cpp" />
     <ClCompile Include="Engine\Debug\EngineDebug.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -222,12 +228,110 @@
     <ClCompile Include="Engine\EngineFactory.cpp" />
     <Content Include="README.md" />
     <Content Include="Shader\Hello.hlsl" />
+    <ClCompile Include="Engine\Interface\DirectXDeviceInterface.cpp" />
     <ClCompile Include="Engine\Math\EngineMath.cpp" />
+    <ClCompile Include="Engine\Mesh\BoxMesh.cpp" />
+    <ClCompile Include="Engine\Mesh\ConeMesh.cpp" />
+    <ClCompile Include="Engine\Mesh\Core\Mesh.cpp" />
+    <ClCompile Include="Engine\Mesh\Core\MeshManage.cpp" />
+    <ClCompile Include="Engine\Mesh\Core\MeshType.cpp" />
+    <ClCompile Include="Engine\Mesh\Core\ObjectTransformation.cpp" />
+    <ClCompile Include="Engine\Mesh\CustomMesh.cpp" />
+    <ClCompile Include="Engine\Mesh\CylinderMesh.cpp" />
+    <ClCompile Include="Engine\Mesh\PlaneMesh.cpp" />
+    <ClCompile Include="Engine\Mesh\SphereMesh.cpp" />
     <ClCompile Include="Engine\Platform\Windows\WindowsEngine.cpp" />
     <ClCompile Include="Engine\Platform\Windows\WindowsMessageProcessing.cpp" />
+    <ClCompile Include="Engine\Rendering\Core\Buffer\ConstructBuffer.cpp" />
+    <ClCompile Include="Engine\Rendering\Core\DirectX\RenderingPipeline\DescriptorHeap\DirectXDescriptorHeap.cpp" />
+    <ClInclude Include="Engine\Rendering\Core\DirectX\RenderingPipeline\DescriptorHeap\DirectXDescriptorHeap.h" />
+    <ClCompile Include="Engine\Rendering\Core\DirectX\RenderingPipeline\Geometry\GeometryMap.cpp" />
+    <ClInclude Include="Engine\Rendering\Core\DirectX\RenderingPipeline\Geometry\GeometryMap.h" />
+    <ClCompile Include="Engine\Rendering\Core\DirectX\RenderingPipeline\Geometry\RenderingData.cpp" />
+    <ClCompile Include="Engine\Rendering\Core\DirectX\RenderingPipeline\PipelineState\DirectXPipelineState.cpp" />
+    <ClInclude Include="Engine\Rendering\Core\DirectX\RenderingPipeline\PipelineState\DirectXPipelineState.h" />
+    <ClCompile Include="Engine\Rendering\Core\DirectX\RenderingPipeline\RenderingPipeline.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>x64\Debug\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>x64\Debug\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>x64\Debug\</ModuleDependenciesFile>
+      <ModuleOutputFile>x64\Debug\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>x64\Debug\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>x64\Debug\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>x64\Debug\DIOYFEngine.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>x64\Debug\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>x64\Debug\DIOYFEngine.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <XMLDocumentationFileName>x64\Debug\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\DIOYFEngine\;</AdditionalIncludeDirectories>
+      <SDLCheck>true</SDLCheck>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
+    <ClCompile Include="Engine\Rendering\Core\DirectX\RenderingPipeline\RootSignature\DirectXRootSignature.cpp" />
+    <ClCompile Include="Engine\Rendering\Core\Rendering.cpp" />
+    <ClCompile Include="Engine\Rendering\Core\RenderingResourcesUpdate.cpp" />
     <ClCompile Include="Engine\Rendering\Engine\Core\RenderingEngine.cpp" />
     <ClCompile Include="Engine\Rendering\Engine\DirectX\Core\DirectXRenderingEngine.cpp" />
     <ClCompile Include="Engine\Rendering\Engine\DirectX\DirectX12RenderingEngine.cpp" />
+    <ClCompile Include="Engine\Shader\Core\Shader.cpp" />
     <ClCompile Include="simple_library\private\simple_channel\simple_io_stream\simple_io_stream.cpp" />
     <ClCompile Include="simple_library\private\simple_channel\simple_net_channel\simple_channel.cpp" />
     <ClCompile Include="simple_library\private\simple_channel\simple_net_connetion\simple_connetion.cpp" />
@@ -284,27 +388,54 @@
     <ClInclude Include="Engine\Actor\Core\ActorObject.h" />
     <ClInclude Include="Engine\CodeReflection\CodeReflectionMacroTag.h" />
     <ClInclude Include="Engine\Component\Core\Component.h" />
+    <ClInclude Include="Engine\Component\InputComponent.h" />
+    <ClInclude Include="Engine\Component\Input\Input.h" />
+    <ClInclude Include="Engine\Component\Input\InputType.h" />
     <ClInclude Include="Engine\Component\TransformationComponent.h" />
     <ClInclude Include="Engine\Config\EngineRenderConfig.h" />
+    <ClInclude Include="Engine\Core\Camera.h" />
+    <ClInclude Include="Engine\Core\CameraType.h" />
     <ClInclude Include="Engine\Core\CoreObject\CoreMinimalObject.h" />
     <ClInclude Include="Engine\Core\CoreObject\GuidInterface.h" />
     <ClInclude Include="Engine\Core\Engine.h" />
     <ClInclude Include="Engine\Core\Viewport\Viewport.h" />
     <ClInclude Include="Engine\Core\Viewport\ViewportInfo.h" />
     <ClCompile Include="Engine\Core\WinMainCommandParameters.cpp" />
+    <ClInclude Include="Engine\Core\Viewport\ViewportTransformation.h" />
     <ClInclude Include="Engine\Core\WinMainCommandParameters.h" />
+    <ClInclude Include="Engine\Core\World.h" />
     <ClInclude Include="Engine\Debug\EngineDebug.h" />
     <ClInclude Include="Engine\Debug\Log\SimpleLog.h" />
     <ClInclude Include="Engine\EngineFactory.h" />
     <ClInclude Include="Engine\EngineMinimal.h" />
+    <ClInclude Include="Engine\Interface\DirectXDeviceInterface.h" />
     <ClInclude Include="Engine\Math\EngineMath.h" />
+    <ClInclude Include="Engine\Mesh\BoxMesh.h" />
+    <ClInclude Include="Engine\Mesh\ConeMesh.h" />
+    <ClInclude Include="Engine\Mesh\Core\Mesh.h" />
+    <ClInclude Include="Engine\Mesh\Core\MeshManage.h" />
+    <ClInclude Include="Engine\Mesh\Core\MeshType.h" />
+    <ClInclude Include="Engine\Mesh\Core\ObjectTransformation.h" />
+    <ClInclude Include="Engine\Mesh\CustomMesh.h" />
+    <ClInclude Include="Engine\Mesh\CylinderMesh.h" />
+    <ClInclude Include="Engine\Mesh\PlaneMesh.h" />
+    <ClInclude Include="Engine\Mesh\SphereMesh.h" />
     <ClInclude Include="Engine\Platform\Windows\WindowsEngine.h" />
     <ClInclude Include="Engine\Platform\Windows\WindowsMessageProcessing.h" />
     <ClInclude Include="Engine\Platform\Windows\WindowsPlatform.h" />
+    <ClInclude Include="Engine\Rendering\Core\Buffer\ConstructBuffer.h" />
+    <ClCompile Include="Engine\Rendering\Core\DirectX\RenderingPipeline\ConstantBuffer\ConstantBufferViews.cpp" />
+    <ClInclude Include="Engine\Rendering\Core\DirectX\RenderingPipeline\ConstantBuffer\ConstantBufferViews.h" />
+    <ClInclude Include="Engine\Rendering\Core\DirectX\RenderingPipeline\Geometry\RenderingData.h" />
+    <ClInclude Include="Engine\Rendering\Core\DirectX\RenderingPipeline\RenderingPipeline.h" />
+    <ClInclude Include="Engine\Rendering\Core\DirectX\RenderingPipeline\RootSignature\DirectXRootSignature.h" />
+    <ClInclude Include="Engine\Rendering\Core\Rendering.h" />
+    <ClInclude Include="Engine\Rendering\Core\RenderingResourcesUpdate.h" />
     <ClInclude Include="Engine\Rendering\DirectX12\d3dx12.h" />
     <ClInclude Include="Engine\Rendering\Engine\Core\RenderingEngine.h" />
     <ClInclude Include="Engine\Rendering\Engine\DirectX\Core\DirectXRenderingEngine.h" />
     <ClInclude Include="Engine\Rendering\Engine\DirectX\DirectX12RenderingEngine.h" />
+    <ClInclude Include="Engine\Shader\Core\Shader.h" />
     <ClInclude Include="simple_library\private\simple_channel\simple_net_connetion\simple_connetion_tcp.h" />
     <ClInclude Include="simple_library\private\simple_channel\simple_net_connetion\simple_connetion_udp.h" />
     <ClInclude Include="simple_library\private\simple_channel\simple_net_drive\simple_net_drive_tcp.h" />
@@ -368,8 +499,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Engine\Config\Core\" />
-    <Folder Include="Engine\Interface\" />
-    <Folder Include="Engine\Rendering\Core\" />
     <Folder Include="simple_library\public\simple_http\" />
     <Folder Include="simple_library\public\simple_mysql\" />
     <Folder Include="simple_library\public\simple_xml\public\" />
