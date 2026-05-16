@@ -156,7 +156,42 @@ int CDirectXRenderingEngine::PostInit()
 				InMaterial->SetMaterialType(EMaterialType::BlinnPhong);
 			}
 		}
-		
+
+		// Minnaert
+		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
+		{
+			SphereMesh->SetPosition(XMFLOAT3(-9,7,0));
+			if(CMaterial* InMaterial = (*SphereMesh->GetMaterials())[0])
+			{
+				InMaterial->SetBaseColor(fvector_4d(0.5,0.5,0.5,1.f));
+				InMaterial->SetMaterialType(EMaterialType::Minnaert);
+				InMaterial->SetRoughness(0.8f);
+			}
+		}
+
+		// Banded
+		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
+		{
+			SphereMesh->SetPosition(XMFLOAT3(-9,2,0));
+			if(CMaterial* InMaterial = (*SphereMesh->GetMaterials())[0])
+			{
+				InMaterial->SetBaseColor(fvector_4d(0.5,0.5,0.8,1.f));
+				InMaterial->SetMaterialType(EMaterialType::Banded);
+				InMaterial->SetRoughness(0.8f);
+			}
+		}
+
+		// GradualBanded
+		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
+		{
+			SphereMesh->SetPosition(XMFLOAT3(-15,2,0));
+			if(CMaterial* InMaterial = (*SphereMesh->GetMaterials())[0])
+			{
+				InMaterial->SetBaseColor(fvector_4d(0.5,0.5,0.8,1.f));
+				InMaterial->SetMaterialType(EMaterialType::GradualBanded);
+				InMaterial->SetRoughness(0.8f);
+			}
+		}
 
 		//if (GMesh* CylinderMesh = MeshManage->CreateCylinderMesh(1.f, 1.f, 5.f, 20, 20))
 		//{

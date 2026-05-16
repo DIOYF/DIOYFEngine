@@ -125,6 +125,47 @@ float4 PixelShaderMain(MeshVertexOut MVOut) :SV_TARGET
 		float DiffuseReflection = dot(ModelNormal, normLightDirection);
 		DotValue = max((DiffuseReflection + WrapValue) / (1.f + WrapValue), 0.f);
 	}
+	else if(materialType == 5) // Minnaert
+	{
+		float3 ViewDirection = normalize(ViewportPosition.xyz - MVOut.WorldPosition.xyz );
+
+		float DotLight = max(dot(ModelNormal, normLightDirection), 0.f);
+		float DotView = max(dot(ModelNormal, ViewDirection), 0.f);
+
+		float MaterialShininess = 1.f - saturate(MaterialRoughness);
+		float M = MaterialShininess * 20.f;
+		DotValue = saturate(DotLight * pow(DotLight * DotView, M));
+	}
+	else if(materialType == 6) // Banded
+	{
+		float DiffuseReflection = (dot(ModelNormal, normLightDirection)  + 1.f) * 0.5;
+		float Layered = 5.f;
+		DotValue = floor(DiffuseReflection * Layered) / Layered;
+	}
+	else if(materialType == 7) // Banded
+	{
+		float4 Color2 = {0.4f, 0.2f, 0.4f, 1.f};
+
+		float LightDotValue = dot(ModelNormal, normLightDirection);
+		
+		float DiffuseReflection = (LightDotValue  + 1.f) * 0.5;
+		
+		float Layered = 4.f;
+		DotValue = floor(DiffuseReflection * Layered) / Layered;
+		
+		material.BaseColor = lerp(material.BaseColor, Color2, LightDotValue);
+	}
+	else if(materialType == 8) // Banded
+	{
+		float DiffuseReflection = (dot(ModelNormal, normLightDirection)  + 1.f) * 0.5;
+		float Layered = 5.f;
+
+		float3 ViewDirection = normalize(ViewportPosition.xyz - MVOut.WorldPosition.xyz );
+		float3 F0 = {0.1f, 0.1f, 0.1f};
+		Specular.xyz = FresnelSchlickMethod(F0, ModelNormal, ViewDirection, 5.f);
+
+		DotValue = floor(DiffuseReflection * Layered) / Layered;
+	}
 	else if(materialType == 100) // Fresnel
 	{
 		float3 ViewDirection = normalize(ViewportPosition.xyz - MVOut.WorldPosition.xyz );
