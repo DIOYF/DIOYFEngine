@@ -13,6 +13,7 @@
 #include "../../../../Core/CoreObject/CoreMinimalObject.h"
 #include "../../../../Core/World.h"
 #include "../../../../Mesh/Core/MeshManage.h"
+#include "Engine/Mesh/Core/Material/Material.h"
 
 
 #if defined(_WIN32)
@@ -76,29 +77,97 @@ int CDirectXRenderingEngine::PostInit()
 	{
 
 		//构建Mesh
-		if (GMesh* BoxMesh = MeshManage->CreateBoxMesh(4.f, 3.f, 1.5f))
-		{
-			BoxMesh->SetPosition(XMFLOAT3(4,3,5));
-			BoxMesh->SetRotation(fvector_3d(60.f, 1.f, 20.f));
-		}
+		//if (GMesh* BoxMesh = MeshManage->CreateBoxMesh(4.f, 3.f, 1.5f))
+		//{
+		//	BoxMesh->SetPosition(XMFLOAT3(4,3,5));
+		//	BoxMesh->SetRotation(fvector_3d(60.f, 1.f, 20.f));
+		//}
 		
-		MeshManage->CreatePlaneMesh(4.f, 3.f, 20, 20);
+		if(GMesh* PlaneMesh = MeshManage->CreatePlaneMesh(4.f, 3.f, 20, 20))
+		{
+			PlaneMesh->SetPosition(XMFLOAT3(0.f, -2.f, 0.f));
+			PlaneMesh->SetScale(fvector_3d(100.f,100.f,100.f));
+		}
+
+		// lambert
 		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
 		{
-			SphereMesh->SetPosition(XMFLOAT3(1,2,4));
-			SphereMesh->SetScale(fvector_3d(3.f, 3.f,3.f));
+			SphereMesh->SetPosition(XMFLOAT3(-3,2,0));
+			if(CMaterial* InMaterial = (*SphereMesh->GetMaterials())[0])
+			{
+				InMaterial->SetBaseColor(fvector_4d(0.8,0.5,0.5,1.f));
+				InMaterial->SetMaterialType(EMaterialType::Lambert);
+			}
 		}
 
-		if (GMesh* CylinderMesh = MeshManage->CreateCylinderMesh(1.f, 1.f, 5.f, 20, 20))
+		// half lambert
+		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
 		{
-			CylinderMesh->SetPosition(XMFLOAT3(1, -2, -4));
+			SphereMesh->SetPosition(XMFLOAT3(3,2,0));
+			if(CMaterial* InMaterial = (*SphereMesh->GetMaterials())[0])
+			{
+				InMaterial->SetBaseColor(fvector_4d(0.5,0.9,0.5,1.f));
+				InMaterial->SetMaterialType(EMaterialType::HalfLambert);
+			}
 		}
 
-		if (GMesh* ConeMesh = MeshManage->CreateConeMesh(1.f, 5.f, 20, 20))
+		// warpLight
+		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
 		{
-			ConeMesh->SetPosition(XMFLOAT3(-1, 1, 9));
-			ConeMesh->SetRotation(fvector_3d(90.f, 1.f, 20.f));
+			SphereMesh->SetPosition(XMFLOAT3(-3,7,0));
+			if(CMaterial* InMaterial = (*SphereMesh->GetMaterials())[0])
+			{
+				InMaterial->SetBaseColor(fvector_4d(0.5,0.9,0.5,1.f));
+				InMaterial->SetMaterialType(EMaterialType::WrapLight);
+			}
 		}
+
+		// phong
+		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
+		{
+			SphereMesh->SetPosition(XMFLOAT3(9,2,0));
+			if(CMaterial* InMaterial = (*SphereMesh->GetMaterials())[0])
+			{
+				InMaterial->SetBaseColor(fvector_4d(0.5,0.5,0.5,1.f));
+				InMaterial->SetMaterialType(EMaterialType::Phong);
+				InMaterial->SetRoughness(0.99f);
+			}
+		}
+
+		// Fresnel
+		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
+		{
+			SphereMesh->SetPosition(XMFLOAT3(3,7,0));
+			if(CMaterial* InMaterial = (*SphereMesh->GetMaterials())[0])
+			{
+				InMaterial->SetBaseColor(fvector_4d(0.6,0.5,0.5,1.f));
+				InMaterial->SetMaterialType(EMaterialType::Fresnel);
+			}
+		}
+
+		// BlinnPhong
+		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
+		{
+			SphereMesh->SetPosition(XMFLOAT3(9,7,0));
+			if(CMaterial* InMaterial = (*SphereMesh->GetMaterials())[0])
+			{
+				InMaterial->SetBaseColor(fvector_4d(0.5,0.5,0.5,1.f));
+				InMaterial->SetRoughness(0.99f);
+				InMaterial->SetMaterialType(EMaterialType::BlinnPhong);
+			}
+		}
+		
+
+		//if (GMesh* CylinderMesh = MeshManage->CreateCylinderMesh(1.f, 1.f, 5.f, 20, 20))
+		//{
+		//	CylinderMesh->SetPosition(XMFLOAT3(1, -2, -4));
+		//}
+
+		//if (GMesh* ConeMesh = MeshManage->CreateConeMesh(1.f, 5.f, 20, 20))
+		//{
+		//	ConeMesh->SetPosition(XMFLOAT3(-1, 1, 9));
+		//	ConeMesh->SetRotation(fvector_3d(90.f, 1.f, 20.f));
+		//}
 		
 	}
 	

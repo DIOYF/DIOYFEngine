@@ -3,11 +3,17 @@
 #include "MeshType.h"
 #include "../../Actor/Core/ActorObject.h"
 
+
 class CTransformationComponent;
+class CMaterial;
+
 class GMesh :public GActorObject, public IRenderingInterface
 {
     CVARIABLE()
     CTransformationComponent* TransformationComponent;
+
+    CVARIABLE()
+    vector<CMaterial*> Materials;
 
 public:
     GMesh();
@@ -20,5 +26,8 @@ public:
     virtual void Draw(float DeltaTime);
     virtual void PostDraw(float DeltaTime);
 
-
+public:
+    UINT GetMaterialNum() const;
+    vector<CMaterial*>* GetMaterials() {return &Materials; }
+    
 };

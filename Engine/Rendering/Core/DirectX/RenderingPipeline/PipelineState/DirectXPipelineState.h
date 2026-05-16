@@ -2,6 +2,7 @@
 #include "../../../../../Interface/DirectXDeviceInterface.h"
 #include "../../../RenderingResourcesUpdate.h"
 #include "../../../../../Shader/Core/Shader.h"
+#include "Engine/Rendering/Core/DirectX/RenderingPipeline/RenderingPipelineType.h"
 
 //提供渲染内容的接口
 struct FDirectXPipelineState :public IDirectXDeviceInterfece_Struct
@@ -27,6 +28,10 @@ public:
     //BuildPSO
     void Build();
 private:
-    ComPtr<ID3D12PipelineState> PSO;
+    void CaptureKeyBoardKeys();
+    
+private:
+    unordered_map<int, ComPtr<ID3D12PipelineState>> PSO;
     D3D12_GRAPHICS_PIPELINE_STATE_DESC GPSDesc;
+    EPipelineState PipelineState;
 };

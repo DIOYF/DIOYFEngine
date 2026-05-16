@@ -1,6 +1,6 @@
 # DIOYFEngine
 
-DIOYFEngine 是一个基于 C++ 的图形引擎练习项目，当前主要面向 Windows 平台开发，项目中包含基础引擎框架、平台层代码，以及独立的 `simple_library` 公共库模块。
+DIOYFEngine 是一个基于 DirectX12 C++ 的图形引擎练习项目，当前主要面向 Windows 平台开发，项目中包含基础引擎框架、平台层代码，以及独立的 `simple_library` 公共库模块。
 
 ## 项目结构
 
@@ -46,5 +46,7 @@ DIOYFEngine
 ```xml
 <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 ```
+
+
 
 

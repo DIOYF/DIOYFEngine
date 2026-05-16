@@ -4,16 +4,20 @@
 
 FDirectXPipelineState::FDirectXPipelineState()
 {
-
+	PipelineState = GrayModel;
+	
+	PSO.insert(pair<int, ComPtr<ID3D12PipelineState>>(4, ComPtr<ID3D12PipelineState>())); // 线框
+	PSO.insert(pair<int, ComPtr<ID3D12PipelineState>>(5, ComPtr<ID3D12PipelineState>())); // shader
 }
 
 void FDirectXPipelineState::PreDraw(float DeltaTime)
 {
-    GetGraphicsCommandList()->Reset(GetCommandAllocator().Get(), PSO.Get());
+    GetGraphicsCommandList()->Reset(GetCommandAllocator().Get(), PSO[(int)PipelineState].Get());
 }
 
 void FDirectXPipelineState::Draw(float DeltaTime)
 {
+	CaptureKeyBoardKeys();
 }
 
 void FDirectXPipelineState::PostDraw(float DeltaTime)
@@ -52,12 +56,12 @@ void FDirectXPipelineState::Build()
 {
     //配置光栅化状态
     GPSDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
-    GPSDesc.RasterizerState.FillMode = D3D12_FILL_MODE_WIREFRAME;//以线框方式显示
+    
 
     //0000..0000
     GPSDesc.SampleMask = UINT_MAX;
-
-    GPSDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+	GPSDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+    
     GPSDesc.NumRenderTargets = 1;
 
     GPSDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
@@ -70,5 +74,21 @@ void FDirectXPipelineState::Build()
     GPSDesc.RTVFormats[0] = GetEngine()->GetRenderingEngine()->GetBackBufferFormat();
     GPSDesc.DSVFormat = GetEngine()->GetRenderingEngine()->GetDepthStencilFormat();
 
-    ANALYSIS_HRESULT(GetD3dDevice()->CreateGraphicsPipelineState(&GPSDesc, IID_PPV_ARGS(&PSO)))
+	GPSDesc.RasterizerState.FillMode = D3D12_FILL_MODE_WIREFRAME;//以线框方式显示
+    ANALYSIS_HRESULT(GetD3dDevice()->CreateGraphicsPipelineState(&GPSDesc, IID_PPV_ARGS(&PSO[Wireframe])))
+
+	GPSDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;//实体方式
+	ANALYSIS_HRESULT(GetD3dDevice()->CreateGraphicsPipelineState(&GPSDesc, IID_PPV_ARGS(&PSO[GrayModel])))
+}
+
+void FDirectXPipelineState::CaptureKeyBoardKeys()
+{
+	if (GetAsyncKeyState('4') & 0x8000)
+	{
+		PipelineState = EPipelineState::Wireframe;
+	}
+	else if(GetAsyncKeyState('5') & 0x8000)
+	{
+		PipelineState = EPipelineState::GrayModel;
+	}
 }

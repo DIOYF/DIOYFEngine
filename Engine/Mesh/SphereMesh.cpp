@@ -28,7 +28,10 @@ void CSphereMesh::CreateMesh(FMeshRenderingData& MeshData, float InRadius, uint3
 	float BetaValue = XM_PI / InAxialSubdivision;
 
 	MeshData.VertexData.push_back(FVertex(
-		XMFLOAT3(0.f, InRadius,0.f),XMFLOAT4(Colors::Red)));
+		XMFLOAT3(0.f, InRadius,0.f),
+		XMFLOAT4(Colors::Red),
+		XMFLOAT3(0.f, 1.f, 0.f)
+		));
 
 	for (uint32_t i = 1; i < InAxialSubdivision; ++i)
 	{
@@ -54,7 +57,9 @@ void CSphereMesh::CreateMesh(FMeshRenderingData& MeshData, float InRadius, uint3
 	}
 
 	MeshData.VertexData.push_back(FVertex(
-		XMFLOAT3(0.f, -InRadius, 0.f), XMFLOAT4(Colors::Red)));
+		XMFLOAT3(0.f, -InRadius, 0.f),
+		XMFLOAT4(Colors::Red),
+		XMFLOAT3(0.f, -1.f, 0.f)));
 
 	//绘制北极
 	for (uint32_t Index = 0; Index <= InAxialSubdivision; ++Index)
