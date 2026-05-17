@@ -50,9 +50,20 @@ void CSphereMesh::CreateMesh(FMeshRenderingData& MeshData, float InRadius, uint3
 				XMFLOAT4(Colors::White)));
 
 			int TopIndex = MeshData.VertexData.size() - 1;
+			FVertex& InVertex = MeshData.VertexData[TopIndex];
 
-			XMVECTOR Pos = XMLoadFloat3(&MeshData.VertexData[TopIndex].Position);
-			XMStoreFloat3(&MeshData.VertexData[TopIndex].Normal,XMVector3Normalize(Pos));
+			// 位置
+			XMVECTOR Pos = XMLoadFloat3(&InVertex.Position);
+			XMStoreFloat3(&InVertex.Normal,XMVector3Normalize(Pos));
+
+			// U方向切线
+			InVertex.UTangent.x = -InRadius * sinf(Beta) * sinf(Theta);
+			InVertex.UTangent.y = 0.f;
+			InVertex.UTangent.z = InRadius * sinf(Beta) * cosf(Theta);
+			XMVECTOR Tangent = XMLoadFloat3(&InVertex.UTangent);
+			XMStoreFloat3(&InVertex.UTangent, XMVector3Normalize(Tangent));
+
+
 		}
 	}
 

@@ -193,6 +193,66 @@ int CDirectXRenderingEngine::PostInit()
 			}
 		}
 
+		// FinalBanded
+		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
+		{
+			SphereMesh->SetPosition(XMFLOAT3(-15,7,0));
+			if(CMaterial* InMaterial = (*SphereMesh->GetMaterials())[0])
+			{
+				InMaterial->SetBaseColor(fvector_4d(0.5,0.5,0.8,1.f));
+				InMaterial->SetMaterialType(EMaterialType::FinalBanded);
+				InMaterial->SetRoughness(0.8f);
+			}
+		}
+
+		// BackLight
+		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
+		{
+			SphereMesh->SetPosition(XMFLOAT3(-15,12,0));
+			if(CMaterial* InMaterial = (*SphereMesh->GetMaterials())[0])
+			{
+				InMaterial->SetBaseColor(fvector_4d(0.5,0.9,0.5,1.f));
+				InMaterial->SetMaterialType(EMaterialType::BackLight);
+			}
+		}
+
+		// AnisotropyKajiyaKay
+		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
+		{
+			SphereMesh->SetPosition(XMFLOAT3(-9,12,0));
+			if(CMaterial* InMaterial = (*SphereMesh->GetMaterials())[0])
+			{
+				InMaterial->SetBaseColor(fvector_4d(0.5,0.9,0.5,1.f));
+				InMaterial->SetMaterialType(EMaterialType::AnisotropyKajiyaKay);
+				
+			}
+		}
+
+		// OrayLayar
+		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
+		{
+			SphereMesh->SetPosition(XMFLOAT3(-3,12,0));
+			if(CMaterial* InMaterial = (*SphereMesh->GetMaterials())[0])
+			{
+				InMaterial->SetBaseColor(fvector_4d(0.7,0.5,0.5,1.f));
+				InMaterial->SetMaterialType(EMaterialType::OrenNayar);
+				InMaterial->SetRoughness(0.99f);
+			}
+		}
+
+		// PBR
+		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
+		{
+			SphereMesh->SetPosition(XMFLOAT3(3,12,0));
+			if(CMaterial* InMaterial = (*SphereMesh->GetMaterials())[0])
+			{
+				InMaterial->SetBaseColor(fvector_4d(0.7,0.8,0.5,1.f));
+				InMaterial->SetMaterialType(EMaterialType::PBR);
+				InMaterial->SetRoughness(0.99f);
+			}
+		}
+		
+
 		//if (GMesh* CylinderMesh = MeshManage->CreateCylinderMesh(1.f, 1.f, 5.f, 20, 20))
 		//{
 		//	CylinderMesh->SetPosition(XMFLOAT3(1, -2, -4));

@@ -422,6 +422,7 @@
     <ClCompile Include="Engine\Shader\Core\Shader.cpp" />
     <Content Include="Shader\Light.hlsl" />
     <Content Include="Shader\Material.hlsl" />
+    <Content Include="Shader\PBR.hlsl" />
     <ClCompile Include="simple_library\private\simple_channel\simple_io_stream\simple_io_stream.cpp" />
     <ClCompile Include="simple_library\private\simple_channel\simple_net_channel\simple_channel.cpp" />
     <ClCompile Include="simple_library\private\simple_channel\simple_net_connetion\simple_connetion.cpp" />

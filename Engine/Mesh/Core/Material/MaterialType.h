@@ -11,6 +11,10 @@ enum EMaterialType
     Banded, // 卡通效果
     GradualBanded, // 渐变卡通
     FinalBanded, // 最终的卡通材质
+    BackLight, // 玉石
+    AnisotropyKajiyaKay, // 头发渲染
+    OrenNayar, // GDC 粗糙表面
+    PBR = 20, // PBR模型
     Fresnel = 100,
     Max,
 };
